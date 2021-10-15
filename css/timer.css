@@ -1,0 +1,73 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.timer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: orange;
+}
+
+.field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.value {
+  margin-bottom: 5px;
+  font-size: 50px;
+  line-height: 1;
+}
+
+.field:not(:last-child) .value::after {
+  position: absolute;
+  content: '\2236';
+  top: 0;
+  right: -11px;
+}
+
+.label {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.field:not(:last-child) {
+  margin-right: 10px;
+}
+
+.target-date {
+  padding: 10px;
+  text-align: center;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: rgb(131, 250, 204);
+}
+
+.target-date-text {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.target-date-show {
+  margin: 0;
+  font-size: 24px;
+  color: blue;
+  line-height: 1;
+  font-weight: 600;
+}
