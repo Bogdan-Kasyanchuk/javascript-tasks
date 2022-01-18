@@ -1,21 +1,40 @@
-.container {
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-family: 'Architects Daughter', cursive;
+  line-height: 1;
+  background-image: linear-gradient(to bottom right, #4da0b0, #d39d38);
 }
 
 .timer {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   padding: 10px;
-  border: 2px solid black;
+  border: 5px solid black;
   border-radius: 10px;
-  background-color: orange;
 }
 
 .field {
@@ -23,51 +42,72 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-left: 10px;
-  padding-right: 10px;
+  font-family: 'Frijole', cursive;
+}
+
+.field:not(:last-child) {
+  margin-right: 40px;
 }
 
 .value {
   margin-bottom: 5px;
-  font-size: 50px;
-  line-height: 1;
+  font-size: 100px;
 }
 
 .field:not(:last-child) .value::after {
   position: absolute;
   content: '\2236';
-  top: 0;
-  right: -11px;
+  top: -6px;
+  right: -45px;
 }
 
 .label {
-  font-size: 14px;
-  line-height: 1;
+  font-size: 16px;
 }
 
-.field:not(:last-child) {
-  margin-right: 10px;
-}
-
-.target-date {
-  padding: 10px;
+.date {
+  margin-bottom: 30px;
   text-align: center;
-  border: 2px solid black;
-  border-radius: 10px;
-  background-color: rgb(131, 250, 204);
-}
-
-.target-date-text {
-  margin-top: 0;
-  margin-bottom: 10px;
-  font-size: 20px;
-  line-height: 1;
 }
 
 .target-date-show {
-  margin: 0;
-  font-size: 24px;
+  margin-bottom: 15px;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.target-date-show-value {
   color: blue;
-  line-height: 1;
-  font-weight: 600;
+}
+
+.target-date-enter {
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.target-date-input {
+  padding: 5px;
+  font-size: 16px;
+  background-color: transparent;
+  border: 2px solid black;
+  border-radius: 5px;
+  outline: none;
+}
+
+button {
+  padding: 5px;
+  font-family: inherit;
+  font-size: 20px;
+  font-weight: 700;
+  background-color: transparent;
+  border: 2px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  color: blue;
+  border-color: blue;
+  outline: none;
 }

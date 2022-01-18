@@ -9,23 +9,25 @@ export default class CountdownTimer {
     this.hoursLabelEl = this.selectorEL.querySelector('[data-label="hours"]');
     this.minsLabelEl = this.selectorEL.querySelector('[data-label="mins"]');
     this.secsLabelEl = this.selectorEL.querySelector('[data-label="secs"]');
-    this.targetDateEl = document.querySelector('.target-date-show');
-    this.dateEl = this.selectorEL.querySelector('[data-input="date"]');
+    this.targetDateEl = document.querySelector('[data-target="target"]');
+    this.inputDateEl = this.selectorEL.querySelector('[data-input="input"]');
     this.targetDate = null;
     this.timerId = null;
   }
 
   start() {
-    this.targetDate = new Date(this.dateEl.value);
+    this.targetDate = new Date(this.inputDateEl.value);
     this.timerId = setInterval(() => {
-      const currentTime = new Date();
-      const timeLeft = this.targetDate - currentTime;
       this.targetDateValues();
 
-      const days = this.pad(Math.floor(timeLeft / (1000 * 60 * 60 * 24)));
-      const hours = this.pad(Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
-      const mins = this.pad(Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60)));
-      const secs = this.pad(Math.floor((timeLeft % (1000 * 60)) / 1000));
+      const days = this.pad(Math.floor((this.targetDate - new Date()) / (1000 * 60 * 60 * 24)));
+      const hours = this.pad(
+        Math.floor(((this.targetDate - new Date()) % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+      );
+      const mins = this.pad(
+        Math.floor(((this.targetDate - new Date()) % (1000 * 60 * 60)) / (1000 * 60)),
+      );
+      const secs = this.pad(Math.floor(((this.targetDate - new Date()) % (1000 * 60)) / 1000));
       this.timeValues(days, hours, mins, secs);
       this.labelValues();
     }, 1000);
@@ -34,7 +36,6 @@ export default class CountdownTimer {
   stop() {
     clearInterval(this.timerId);
     this.clearMurkup();
-    this.dateEl.value = '';
   }
 
   timeValues(days, hours, mins, secs) {
@@ -45,33 +46,33 @@ export default class CountdownTimer {
   }
 
   labelValues() {
-    if (Number(this.daysEl.textContent) === 1) {
-      this.daysLabelEl.textContent = 'Day';
-    } else {
-      this.daysLabelEl.textContent = 'Days';
-    }
+    Number(this.daysEl.textContent) === 1
+      ? (this.daysLabelEl.textContent = 'DAY')
+      : (this.daysLabelEl.textContent = 'DAYS');
 
-    if (Number(this.hoursEl.textContent) === 1) {
-      this.hoursLabelEl.textContent = 'Hour';
-    } else {
-      this.hoursLabelEl.textContent = 'Hours';
-    }
+    Number(this.hoursEl.textContent) === 1
+      ? (this.hoursLabelEl.textContent = 'HOUR')
+      : (this.hoursLabelEl.textContent = 'HOURS');
 
-    if (Number(this.minsEl.textContent) === 1) {
-      this.minsLabelEl.textContent = 'Minute';
-    } else {
-      this.minsLabelEl.textContent = 'Minutes';
-    }
+    Number(this.minsEl.textContent) === 1
+      ? (this.minsLabelEl.textContent = 'MINUTE')
+      : (this.minsLabelEl.textContent = 'MINUTES');
 
-    if (Number(this.secsEl.textContent) === 1) {
-      this.secsLabelEl.textContent = 'Second';
-    } else {
-      this.secsLabelEl.textContent = 'Seconds';
-    }
+    Number(this.secsEl.textContent) === 1
+      ? (this.secsLabelEl.textContent = 'SECOND')
+      : (this.secsLabelEl.textContent = 'SECONDS');
   }
 
   targetDateValues() {
-    this.targetDateEl.textContent = this.targetDate.toDateString();
+    this.targetDateEl.textContent = this.targetDate.toLocaleString('en-US', {
+      weekday: 'short',
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+    this.targetDateEl.classList.add('target-date-show-value');
   }
 
   clearMurkup() {
@@ -79,6 +80,8 @@ export default class CountdownTimer {
     this.hoursEl.textContent = '00';
     this.minsEl.textContent = '00';
     this.secsEl.textContent = '00';
+    this.targetDateEl.textContent = '. . .';
+    this.targetDateEl.classList.remove('target-date-show-value');
   }
 
   pad(value) {
