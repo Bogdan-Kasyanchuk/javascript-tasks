@@ -1,4 +1,4 @@
-import CountdownTimer from './countdownTimer.js';
+import countDownTimer from './countDownTimer.js';
 
 const refs = {
   startEl: document.querySelector('[data-action="start"]'),
@@ -7,7 +7,7 @@ const refs = {
 
 const { startEl, stopEl } = refs;
 
-const timer = new CountdownTimer({
+const timer = new countDownTimer({
   selector: '#timer-1',
 });
 

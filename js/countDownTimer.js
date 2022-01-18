@@ -1,4 +1,4 @@
-export default class CountdownTimer {
+export default class countDownTimer {
   constructor({ selector }) {
     this.selectorEL = document.querySelector(selector);
     this.daysEl = this.selectorEL.querySelector('[data-value="days"]');
